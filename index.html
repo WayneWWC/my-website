@@ -2,9 +2,18 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>股票下單記錄助手</title>
-    <!-- 載入 React & Babel (編譯 JSX) -->
+    
+    <!-- iPhone 加入主畫面圖示設定 -->
+    <!-- 請將你的圖示命名為 icon.png 並上傳到 GitHub 與 index.html 同一個資料夾 -->
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- 讓網頁看起來像原生 App (隱藏網址列) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="股票紀錄">
+
+    <!-- 載入 React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -15,6 +24,8 @@
     <style>
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        /* 避免手機縮放影響版面 */
+        body { touch-action: manipulation; }
     </style>
 </head>
 <body class="bg-slate-50">
@@ -26,7 +37,6 @@
         const App = () => {
             const [records, setRecords] = useState([]);
             const [showSettings, setShowSettings] = useState(false);
-            // 直接將您提供的網址設定為預設值
             const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbx1GvJvx-dJAJPEdEjbHBll-bUKreAGu6jiBQhUsHu0WBbyY3_laCToEqSY_cwgGSec/exec';
             const [gasUrl, setGasUrl] = useState(localStorage.getItem('stock_gas_url') || DEFAULT_GAS_URL); 
             const [isSyncing, setIsSyncing] = useState(false);
